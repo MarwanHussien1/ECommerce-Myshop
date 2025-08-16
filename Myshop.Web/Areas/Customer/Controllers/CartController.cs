@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Myshop.Entities.Models;
 using Myshop.Entities.Repositories;
 using Myshop.Entities.ViewModels;
