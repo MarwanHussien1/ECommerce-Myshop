@@ -15,6 +15,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 	builder.Configuration.GetConnectionString("DefaultConnection")
 	));
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 //builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
 //	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -45,6 +48,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapRazorPages();
 
