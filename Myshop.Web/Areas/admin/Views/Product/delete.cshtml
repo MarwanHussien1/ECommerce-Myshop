@@ -1,59 +1,69 @@
 ﻿@model ProductVm
 
 @{
-	ViewBag.PagaTitle = "product Managment";
+	ViewBag.PageTitle = "product Managment";
 	ViewBag.CardTitle = " Delete Product";
 	Layout = "_Dashboard";
 
-}
-<div class="row">
-	<div class="col-md-4">
+}<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-header bg-danger text-white text-center">
+                <h4 class="mb-0"><i class="bi bi-trash me-2"></i>Delete Product</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="Delete" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Product.Id" />
+                    <input type="hidden" asp-for="Product.Img" />
 
-		<form method="post" asp-action="Delete" enctype="multipart/form-data">
-			<input type="hidden" asp-for="Product.Id" />
-			<input type="hidden" asp-for="Product.Img" />
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<div class="form-group">
-				<label asp-for="Product.Name" class="control-label"></label>
-				<input asp-for="Product.Name" disabled class="form-control" />
-				<span asp-validation-for="Product.Name" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Product.Description" class="control-label"></label>
-				<input asp-for="Product.Description" disabled class="form-control" />
-				<span asp-validation-for="Product.Description" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Product.Price" class="control-label"></label>
-				<input asp-for="Product.Price" disabled class="form-control" />
-				<span asp-validation-for="Product.Price" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Product.Img" class="control-label"></label>
-				@* <input asp-for="Product.Img" class="form-control" /> *@
-				<input type="file" name="file" disabled id="imgfile" class="form-control" />
-			</div>
-			<div class="form-group">
-				<label asp-for="Product.CategoryId" class="control-label"></label>
-				<select asp-for="Product.CategoryId" disabled class="form-control" asp-items="Model.CategoryList">
-					<option disabled selected>___ SELECT Category ___</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input type="submit" value="Save" class="btn-primary" />
-			</div>
-			<div class="form-group">
-				<a asp-action="Index">Back to index</a>
-			</div>
-		</form>
-	</div>
-	<div class="col-md-4">
-		<div class="product-image-container p-3 shadow-sm rounded bg-white text-center">
-			<img src="~/@Model.Product.Img" alt="@Model.Product.Name" class="img-fluid" />
-		</div>
-	</div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
+                    <div class="mb-3">
+                        <label asp-for="Product.Name" class="form-label fw-bold"></label>
+                        <input asp-for="Product.Name" class="form-control" disabled />
+                    </div>
 
+                    <div class="mb-3">
+                        <label asp-for="Product.Description" class="form-label fw-bold"></label>
+                        <input asp-for="Product.Description" class="form-control" disabled />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Product.Price" class="form-label fw-bold"></label>
+                        <input asp-for="Product.Price" class="form-control" disabled />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Product.Category" class="form-label fw-bold"></label>
+                        <input asp-for="Product.Price" class="form-control" disabled />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Product.CategoryId" class="form-label fw-bold"></label>
+                        <select asp-for="Product.CategoryId" class="form-select" asp-items="Model.CategoryList" disabled>
+                            <option disabled selected>___ SELECT Category ___</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Confirm Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Image Preview -->
+    <div class="col-md-4">
+        <div class="product-image-container p-3 shadow-sm rounded bg-white text-center">
+            <img src="~/@Model.Product.Img" alt="@Model.Product.Name" class="img-fluid rounded" />
+            <p class="mt-2 text-muted">Product image</p>
+        </div>
+    </div>
 </div>
 
 

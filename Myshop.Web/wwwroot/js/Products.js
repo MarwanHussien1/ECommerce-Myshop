@@ -8,9 +8,9 @@ function loaddata() {
         "ajax": {
             "url": "/Admin/Product/GetData",
             "dataSrc": "data"
-            
+
         },
-        "columns" : [
+        "columns": [
             { "data": "name" },
             { "data": "description" },
             { "data": "price" },
@@ -19,49 +19,22 @@ function loaddata() {
                 "data": "id",
                 "render": function (data) {
                     return `
-                            <a href = "/Admin/Product/Edit/${data}" class="btn btn-success">Edit</a> 
-                            <a href = "/Admin/Product/Delete/${data}" class="btn btn-danger">Delete</a> 
-                            
-
-                    `;
+        <div class="d-flex gap-2">
+            <a href="/Admin/Product/Edit/${data}" 
+               class="btn btn-outline-primary btn-sm d-flex align-items-center shadow-sm">
+                <i class="bi bi-pencil-square me-1"></i> Edit
+            </a>
+            <a href="/Admin/Product/Delete/${data}" 
+               class="btn btn-outline-danger btn-sm d-flex align-items-center shadow-sm">
+                <i class="bi bi-trash me-1"></i> Delete
+            </a>
+        </div>
+    `;
                 }
+
 
             }
         ]
     });
 }
 
-//function DeleteItem(url) {
-//    Swal.fire({
-//        title: "Are you sure?",
-//        text: "You won't be able to revert this!",
-//        icon: "warning",
-//        showCancelButton: true,
-//        confirmButtonColor: "#3085d6",
-//        cancelButtonColor: "#d33",
-//        confirmButtonText: "Yes, delete it!"
-//    }).then((result) => {
-//        if (result.isConfirmed) {
-//            $.ajax({
-//                url: url,
-//                type: "DELETE",
-//                success: function (data) {
-//                    console.log("Response from server:", data);
-
-//                    if (data.success ) {
-//                        dtble.ajax.reload();
-//                        toaster.success(data.message);
-//                    } else {
-//                        toaster.error(data.message);
-//                    }
-//                }
-
-//            });
-//            Swal.fire({
-//                title: "Deleted!",
-//                text: "Your file has been deleted.",
-//                icon: "success"
-//            });
-//        }
-//    });
-//}

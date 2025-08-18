@@ -6,55 +6,77 @@
 	Layout = "_Dashboard";
 
 }
-<div class="row">
-	<div class="col-md-4">
-	
-		<form method="post" asp-action="Edit" enctype="multipart/form-data">
-			<input type="hidden" asp-for="Product.Id" />
-			<input type="hidden" asp-for="Product.Img" />
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<div class="form-group">
-				<label asp-for="Product.Name" class="control-label"></label>
-				<input asp-for="Product.Name" class="form-control" />
-				<span asp-validation-for="Product.Name" class="text-danger"></span>
+<div class="row justify-content-center mt-4">
+	<div class="col-md-6">
+		<div class="card shadow-lg border-0 rounded-3">
+			<div class="card-header bg-primary text-dark text-center">
+				<h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Edit Product</h4>
 			</div>
-			<div class="form-group">
-				<label asp-for="Product.Description" class="control-label"></label>
-				<input asp-for="Product.Description" class="form-control" />
-				<span asp-validation-for="Product.Description" class="text-danger"></span>
+			<div class="card-body">
+				<form method="post" asp-action="Edit" enctype="multipart/form-data">
+					<input type="hidden" asp-for="Product.Id" />
+					<input type="hidden" asp-for="Product.Img" />
+
+					<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+					<div class="mb-3">
+						<label asp-for="Product.Name" class="form-label fw-bold"></label>
+						<input asp-for="Product.Name" class="form-control" />
+						<span asp-validation-for="Product.Name" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Product.Description" class="form-label fw-bold"></label>
+						<textarea asp-for="Product.Description" class="form-control" rows="3" placeholder="Enter product description"></textarea>
+						<span asp-validation-for="Product.Description" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Product.Price" class="form-label fw-bold"></label>
+						<input asp-for="Product.Price" class="form-control" />
+						<span asp-validation-for="Product.Price" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Product.Img" class="form-label fw-bold"></label>
+						<input type="file" name="file" id="imgfile" class="form-control" onchange="fillimg(event);" />
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Product.CategoryId" class="form-label fw-bold"></label>
+						<select asp-for="Product.CategoryId" class="form-select" asp-items="Model.CategoryList">
+							<option disabled selected>___ SELECT Category ___</option>
+						</select>
+					</div>
+
+					<div class="d-flex justify-content-between">
+						<a asp-action="Index" class="btn btn-outline-secondary">
+							<i class="bi bi-arrow-left"></i> Back to Index
+						</a>
+						<button type="submit" class="btn btn-primary px-4">
+							<i class="bi bi-save"></i> Save Changes
+						</button>
+					</div>
+				</form>
 			</div>
-			<div class="form-group">
-				<label asp-for="Product.Price" class="control-label"></label>
-				<input asp-for="Product.Price" class="form-control" />
-				<span asp-validation-for="Product.Price" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Product.Img" class="control-label"></label>
-				@* <input asp-for="Product.Img" class="form-control" /> *@
-				<input type="file" name="file" id="imgfile" class="form-control" />
-			</div>
-			<div class="form-group">
-				<label asp-for="Product.CategoryId" class="control-label"></label>
-				<select asp-for="Product.CategoryId" class="form-control" asp-items="Model.CategoryList">
-					<option disabled selected>___ SELECT Category ___</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input type="submit" value="Save" class="btn-primary" />
-			</div>	
-			<div class="form-group">
-				<a asp-action="Index" >Back to index</a>
-			</div>
-		</form>
-	</div>
-	<div class="col-md-4">
-		<div class="product-image-container p-3 shadow-sm rounded bg-white text-center">
-			<img src="~/@Model.Product.Img" alt="@Model.Product.Name" class="img-fluid" />
 		</div>
 	</div>
 
-
+	<!-- Product Image Preview -->
+	<div class="col-md-4">
+		<div class="product-image-container p-3 shadow-sm rounded bg-white text-center">
+			<img src="~/@Model.Product.Img" alt="@Model.Product.Name" class="img-fluid rounded" id="ImagePreview" />
+			<p class="mt-2 text-muted">Current Product Image</p>
+		</div>
+	</div>
 </div>
+
+<script>
+	var fillimg = function (event) {
+		var imgholder = document.getElementById("ImagePreview");
+		imgholder.src = URL.createObjectURL(event.target.files[0]);
+	}
+</script>
 
 
 @section Scripts {
